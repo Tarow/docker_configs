@@ -1,0 +1,25 @@
+version: "3.3"
+
+services:
+  code-server:
+    image: ghcr.io/linuxserver/code-server
+    container_name: code-server
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ-Europe/Berlin 
+    networks:
+      - traefik-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.code.rule=Host(`code.ntasler.de`)
+      - traefik.http.routers.code.entrypoints=websecure
+      - traefik.http.routers.code.tls.certresolver=letsencrypt
+      - traefik.http.services.code.loadbalancer.server.port=8443
+
+networks:
+  traefik-proxy:
+    external: true
