@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  portainer-ce:
+    container_name: portainer
+    restart: unless-stopped
+    image: portainer/portainer-ce
+    ports:
+      - '8000:8000'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - './data:/data'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.ntasler.de`)"
+      - "traefik.http.routers.portainer.entrypoints=websecure"
+      - "traefik.http.routers.portainer.tls.certresolver=letsencrypt"
+      - "traefik.docker.network=traefik-proxy"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+    networks:
+      - traefik-proxy
+
+networks:
+  traefik-proxy:
+    external: true
