@@ -48,6 +48,11 @@ services:
     restart: unless-stopped
     env_file:
       - db.env
+    # Variables defined in db.env:
+    # POSTGRES_USER=
+    # POSTGRES_DB=
+    # POSTGRES_PASSWORD=    
+
     volumes:
       - ./postgres:/var/lib/postgresql/data
 
