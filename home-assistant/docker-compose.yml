@@ -1,0 +1,17 @@
+version: '3'
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: homeassistant/home-assistant:stable
+    volumes:
+      - ./config:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    network_mode: host
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homeassistant.rule=Host(`homeassistant.ntasler.de`)"
+      - "traefik.http.routers.homeassistant.entrypoints=websecure"
+      - "traefik.http.routers.homeassistant.tls.certresolver=letsencrypt"
+      - "traefik.docker.network=traefik-proxy"
+      - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
