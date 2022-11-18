@@ -1,0 +1,56 @@
+version: "3.3"
+
+services:
+  server:
+    image: gitea/gitea:latest
+    container_name: gitea
+    env_file:
+      - server.env
+    # environment variables defined in server.env
+    # environment:
+    # - GITEA__database__DB_TYPE=
+    # - GITEA__database__HOST=
+    # - GITEA__database__NAME=
+    # - GITEA__database__USER=
+    # - GITEA__database__PASSWD=
+    # - USER_UID=
+    # - USER_GID=
+    # - DOMAIN=
+    # - ROOT_URL=
+    # - SSH_PORT=
+    # - SSH_LISTEN_PORT=
+    restart: unless-stopped
+    networks:
+      - traefik-proxy
+      - default
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.gitea.rule=Host(`git.ntasler.de`)
+      - traefik.http.routers.gitea.entrypoints=websecure
+      - traefik.http.routers.gitea.tls.certresolver=letsencrypt
+      - traefik.http.services.gitea.loadbalancer.server.port=3000
+      - traefik.tcp.routers.gitea-ssh.entrypoints=ssh
+      - traefik.tcp.routers.gitea-ssh.rule=HostSNI(`git.ntasler.de`)
+      - traefik.tcp.routers.gitea-ssh.service=gitea-ssh-svc
+      - traefik.tcp.services.gitea-ssh-svc.loadbalancer.server.port=22
+      - traefik.docker.network=traefik-proxy
+    volumes:
+      - ./data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 2222:22
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    env_file:
+      - db.env
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+networks:
+  traefik-proxy:
+    external: true
