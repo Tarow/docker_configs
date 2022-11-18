@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web
+    container_name: calibre-web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      # - DOCKER_MODS=linuxserver/mods:universal-calibre # optional for ebook conversion
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 # optional for Google OAuth
+    volumes:
+      - ./config:/config
+      - ./books:/books
+    restart: unless-stopped
+    networks:
+      - traefik-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.calibre.rule=Host(`calibre.ntasler.de`)
+      - traefik.http.routers.calibre.entrypoints=websecure
+      - traefik.http.routers.calibre.tls.certresolver=letsencrypt
+      - traefik.docker.network=traefik-proxy
+      - traefik.http.services.calibre.loadbalancer.server.port=8083
+
+networks:
+  traefik-proxy:
+    external: true
