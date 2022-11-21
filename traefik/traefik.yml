@@ -1,0 +1,32 @@
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: ":443"
+  ssh:
+    address: ":2222"
+
+api:
+  dashboard: true
+#  insecure: true
+
+providers:
+  docker:
+    exposedByDefault: false
+    network: traefik-proxy
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: mail@ntasler.de
+      storage: /letsencrypt/acme.json
+      dnsChallenge:
+        provider: cloudflare
+
+log:
+  level: WARN
