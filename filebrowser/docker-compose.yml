@@ -2,6 +2,7 @@ version: '3.3'
 services:
   filebrowser:
     image: filebrowser/filebrowser:s6
+    restart: unless-stopped
     container_name: filebrowser
     volumes:
       - /mnt/hdd1/:/srv/hdd/
@@ -11,7 +12,7 @@ services:
       - PUID=1000
       - PGID=1000
     labels:
-      - traefik.enable=true"
+      - traefik.enable=true
       - traefik.http.routers.filebrowser.rule=Host(`filebrowser.ntasler.de`)
       - traefik.http.routers.filebrowser.entrypoints=websecure
       - traefik.http.routers.filebrowser.tls.certresolver=letsencrypt
