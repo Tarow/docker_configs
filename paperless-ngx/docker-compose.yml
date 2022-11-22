@@ -48,6 +48,7 @@ services:
     #  PAPERLESS_TIME_ZONE=
     #  PAPERLESS_OCR_LANGUAGE=
     #  PAPERLESS_FILENAME_FORMAT=
+    #  PAPERLESS_URL=
     networks:
       - traefik-proxy
       - default
