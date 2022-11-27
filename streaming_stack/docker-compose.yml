@@ -26,6 +26,7 @@ services:
       - SERVER_CITIES=Zurich
       - TZ=Europe/Berlin
       - HTTPPROXY=on
+      - JELLYFIN_PublishedServerUrl=jellyfin.ntasler.de
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-proxy"
@@ -210,6 +211,11 @@ services:
     depends_on:
       gluetun:
         condition: service_healthy
+
+  qbittorrent-checker:
+    build: ./qbittorrent_checker
+    container_name: qbittorrent-checker
+    restart: unless-stopped
 
 networks:
   traefik-proxy:

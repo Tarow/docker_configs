@@ -6,6 +6,7 @@ services:
     container_name: filebrowser
     volumes:
       - /mnt/hdd1/:/srv/hdd/
+      - /home/niklas:/srv/home/niklas
       - ./config/database:/database
       - ./config:/config
     environment:

@@ -6,6 +6,11 @@ services:
     container_name: code-server
     volumes:
       - ./config:/config
+      - /home/niklas:/home/niklas
+      - /mnt/hdd1:/hdd
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/lib/docker/cli-plugins/docker-compose:/usr/lib/docker/cli-plugins/docker-compose
     restart: unless-stopped
     environment:
       - PUID=1000
