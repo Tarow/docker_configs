@@ -1,19 +1,20 @@
 version: '3.3'
 services:
   homepage:
-    image: ghcr.io/benphelps/homepage:main
+    image: ghcr.io/benphelps/homepage:nightly
     container_name: homepage
     volumes:
       - ./config:/app/config
       - /mnt/hdd1:/mnt/hdd1:ro
       - ./icons:/app/public/icons
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - PUID=1000
+      - PGID=1000
     labels:
       - traefik.enable=true
       - traefik.http.routers.homepage.rule=Host(`ntasler.de`)
       - traefik.http.routers.homepage.entrypoints=websecure
-      - traefik.http.routers.homepage.tls.certresolver=letsencrypt
-      - traefik.docker.network=traefik-proxy
       - traefik.http.services.homepage.loadbalancer.server.port=3000
     networks:
       - traefik-proxy

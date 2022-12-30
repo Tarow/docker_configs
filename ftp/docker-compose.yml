@@ -3,6 +3,7 @@ services:
   ftp:
     image: stilliard/pure-ftpd:latest
     restart: unless-stopped
+    container_name: ftp-paperless
     env_file:
       - ftp.env
     # environment: # variables defined in ftp.env:

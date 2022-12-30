@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  calibre-web:
+  calibre:
     image: lscr.io/linuxserver/calibre-web
     container_name: calibre-web
     environment:
@@ -17,10 +17,7 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.calibre.rule=Host(`calibre.ntasler.de`)
       - traefik.http.routers.calibre.entrypoints=websecure
-      - traefik.http.routers.calibre.tls.certresolver=letsencrypt
-      - traefik.docker.network=traefik-proxy
       - traefik.http.services.calibre.loadbalancer.server.port=8083
 
 networks:

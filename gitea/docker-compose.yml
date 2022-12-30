@@ -27,13 +27,12 @@ services:
       - traefik.enable=true
       - traefik.http.routers.gitea.rule=Host(`git.ntasler.de`)
       - traefik.http.routers.gitea.entrypoints=websecure
-      - traefik.http.routers.gitea.tls.certresolver=letsencrypt
       - traefik.http.services.gitea.loadbalancer.server.port=3000
+
       - traefik.tcp.routers.gitea-ssh.entrypoints=gitea
       - traefik.tcp.routers.gitea-ssh.rule=HostSNI(`*`)
       - traefik.tcp.routers.gitea-ssh.service=gitea-ssh-svc
       - traefik.tcp.services.gitea-ssh-svc.loadbalancer.server.port=22
-      - traefik.docker.network=traefik-proxy
     volumes:
       - ./data:/data
       - /etc/timezone:/etc/timezone:ro

@@ -10,10 +10,7 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dozzle.rule=Host(`dozzle.ntasler.de`)"
       - "traefik.http.routers.dozzle.entrypoints=websecure"
-      - "traefik.http.routers.dozzle.tls.certresolver=letsencrypt"
-      - "traefik.docker.network=traefik-proxy"
       - "traefik.http.services.dozzle.loadbalancer.server.port=8080"
 
 networks:

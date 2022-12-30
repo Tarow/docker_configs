@@ -8,17 +8,24 @@ entryPoints:
           scheme: https
   websecure:
     address: ":443"
+    http:
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: ntasler.de
+            sans: 
+              - "*.ntasler.de"
   gitea:
     address: ":2222"
 
 api:
   dashboard: true
-#  insecure: true
 
 providers:
   docker:
     exposedByDefault: false
     network: traefik-proxy
+    defaultRule: Host(`{{ coalesce (index .Labels "com.docker.compose.service") (normalize .Name) }}.ntasler.de`)
 
 certificatesResolvers:
   letsencrypt:

@@ -23,23 +23,19 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=mullvad
       - VPN_TYPE=wireguard
-      - SERVER_CITIES=Zurich
+#      - SERVER_CITIES=Zurich
       - TZ=Europe/Berlin
       - HTTPPROXY=on
-      - JELLYFIN_PublishedServerUrl=jellyfin.ntasler.de
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=traefik-proxy"
 
       - "traefik.http.routers.gluetun.rule=Host(`gluetun.ntasler.de`)"
       - "traefik.http.routers.gluetun.entrypoints=websecure"
-      - "traefik.http.routers.gluetun.tls.certresolver=letsencrypt"
       - "traefik.http.routers.gluetun.service=gluetun"
       - "traefik.http.services.gluetun.loadbalancer.server.port=8000"
 
       - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.ntasler.de`)"
       - "traefik.http.routers.qbittorrent.entrypoints=websecure"
-      - "traefik.http.routers.qbittorrent.tls.certresolver=letsencrypt"
       - "traefik.http.routers.qbittorrent.service=qbittorrent"
       - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
 
@@ -50,6 +46,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Berlin
+      - JELLYFIN_PublishedServerUrl=jellyfin.ntasler.de
     volumes:
       - ./jellyfin_config:/config
       - /mnt/hdd1/media:/media

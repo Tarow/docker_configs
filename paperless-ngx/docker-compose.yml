@@ -56,8 +56,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.paperless.rule=Host(`paperless.ntasler.de`)"
       - "traefik.http.routers.paperless.entrypoints=websecure"
-      - "traefik.http.routers.paperless.tls.certresolver=letsencrypt"
-      - "traefik.docker.network=traefik-proxy"
       - "traefik.http.services.paperless.loadbalancer.server.port=8000"
 
 networks:

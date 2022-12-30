@@ -10,8 +10,6 @@ services:
     network_mode: host
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homeassistant.rule=Host(`homeassistant.ntasler.de`)"
+      - "traefik.http.routers.homeassistant.rule=Host(`ha.ntasler.de`)"
       - "traefik.http.routers.homeassistant.entrypoints=websecure"
-      - "traefik.http.routers.homeassistant.tls.certresolver=letsencrypt"
-      - "traefik.docker.network=traefik-proxy"
       - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"

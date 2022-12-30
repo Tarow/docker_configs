@@ -22,7 +22,6 @@ services:
       - traefik.enable=true
       - traefik.http.routers.code.rule=Host(`code.ntasler.de`)
       - traefik.http.routers.code.entrypoints=websecure
-      - traefik.http.routers.code.tls.certresolver=letsencrypt
       - traefik.http.services.code.loadbalancer.server.port=8443
 
 networks:
