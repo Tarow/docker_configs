@@ -28,7 +28,7 @@ services:
     volumes:
       - ./data:/app/data/
     environment:
-      - ALLOW_SIGNUP=true
+      - ALLOW_SIGNUP=false
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Berlin
