@@ -5,6 +5,7 @@ services:
     container_name: "traefik"
     restart: unless-stopped
     labels:
+      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.api.entrypoints=websecure"
       - "traefik.http.routers.api.rule=Host(`traefik.ntasler.de`)"

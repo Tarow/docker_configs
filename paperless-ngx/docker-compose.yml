@@ -53,6 +53,7 @@ services:
       - traefik-proxy
       - default
     labels:
+      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.paperless.rule=Host(`paperless.ntasler.de`)"
       - "traefik.http.routers.paperless.entrypoints=websecure"

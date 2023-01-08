@@ -1,7 +1,7 @@
 version: "3"
 services:
   gluetun:
-    image: qmcgaw/gluetun
+    image: qmcgaw/gluetun:latest
     container_name: gluetun
     cap_add:
       - NET_ADMIN
@@ -27,6 +27,7 @@ services:
       - TZ=Europe/Berlin
       - HTTPPROXY=on
     labels:
+      - "diun.enable=true"
       - "traefik.enable=true"
 
       - "traefik.http.routers.gluetun.rule=Host(`gluetun.ntasler.de`)"
@@ -61,6 +62,7 @@ services:
     networks:
       - traefik-proxy
     labels:
+      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.ntasler.de`)"
       - "traefik.http.routers.jellyfin.entrypoints=websecure"
@@ -68,7 +70,7 @@ services:
       - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
 
   sonarr:
-    image: linuxserver/sonarr
+    image: linuxserver/sonarr:latest
     container_name: sonarr
     environment:
       - PUID=1000
@@ -81,6 +83,7 @@ services:
     networks:
       - traefik-proxy
     labels:
+      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.rule=Host(`sonarr.ntasler.de`)"
       - "traefik.http.routers.sonarr.entrypoints=websecure"
@@ -88,7 +91,7 @@ services:
       - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
 
   radarr:
-    image: linuxserver/radarr
+    image: linuxserver/radarr:latest
     container_name: radarr
     environment:
       - PUID=1000
@@ -101,6 +104,7 @@ services:
     networks:
       - traefik-proxy
     labels:
+      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.rule=Host(`radarr.ntasler.de`)"
       - "traefik.http.routers.radarr.entrypoints=websecure"
@@ -121,6 +125,7 @@ services:
     networks:
       - traefik-proxy
     labels:
+      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.bazarr.rule=Host(`bazarr.ntasler.de`)"
       - "traefik.http.routers.bazarr.entrypoints=websecure"
@@ -141,6 +146,7 @@ services:
     networks:
       - traefik-proxy
     labels:
+      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.jellyseerr.rule=Host(`jellyseerr.ntasler.de`)"
       - "traefik.http.routers.jellyseerr.entrypoints=websecure"
@@ -180,6 +186,7 @@ services:
     volumes:
       - ./prowlarr_config:/config
     labels:
+      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.ntasler.de`)"
       - "traefik.http.routers.prowlarr.entrypoints=websecure"
@@ -188,7 +195,7 @@ services:
 
   qbittorrent:
     container_name: qbittorrent
-    image: linuxserver/qbittorrent
+    image: linuxserver/qbittorrent:latest
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -199,6 +206,8 @@ services:
       - ./qbittorrent_config:/config
       - /mnt/hdd1/media:/media
     network_mode: 'service:gluetun'
+    labels:
+      - "diun.enable=true"
     depends_on:
       gluetun:
         condition: service_healthy

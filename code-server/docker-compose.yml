@@ -19,6 +19,7 @@ services:
     networks:
       - traefik-proxy
     labels:
+      - diun.enable=true
       - traefik.enable=true
       - traefik.http.routers.code.rule=Host(`code.ntasler.de`)
       - traefik.http.routers.code.entrypoints=websecure

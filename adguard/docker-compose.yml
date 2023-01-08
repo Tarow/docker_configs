@@ -1,6 +1,7 @@
 version: '3.7'
 services:
   adguardhome:
+      image: adguard/adguardhome:latest
       container_name: adguardhome
       restart: always
       volumes:
@@ -19,7 +20,6 @@ services:
         - traefik.http.routers.adguard.entrypoints=websecure
         - traefik.http.routers.adguard.middlewares=private-chain@file
         - traefik.http.services.adguard.loadbalancer.server.port=3000
-      image: adguard/adguardhome
       networks:
         - traefik-proxy
 

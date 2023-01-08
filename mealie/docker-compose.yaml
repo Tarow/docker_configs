@@ -13,6 +13,7 @@ services:
       - traefik-proxy
       - default
     labels:
+      - diun.enable=true
       - traefik.enable=true
       - traefik.http.routers.mealie.rule=Host(`mealie.ntasler.de`)
       - traefik.http.routers.mealie.entrypoints=websecure

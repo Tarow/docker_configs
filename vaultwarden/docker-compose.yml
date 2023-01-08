@@ -6,8 +6,9 @@ services:
     volumes:
       - './data/:/data/'
     labels:
+      - diun.enable=true
       - traefik.enable=true
-      - traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.ntasler.de`)
+      - traefik.http.routers.vaultwarden.rule=Host(`vw.ntasler.de`)
       - traefik.http.routers.vaultwarden.entrypoints=websecure
       - traefik.http.routers.vaultwarden.middlewares=private-chain@file
       - traefik.http.services.vaultwarden.loadbalancer.server.port=80
