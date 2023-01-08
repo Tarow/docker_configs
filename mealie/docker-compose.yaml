@@ -2,8 +2,8 @@
 version: "3.7"
 services:
   mealie-frontend:
-    image: hkotel/mealie:frontend-v1.0.0beta-5
-    container_name: mealie-frontend
+    image: hkotel/mealie:frontend-nightly
+    container_name: mealie
     environment:
       - API_URL=http://mealie-api:9000
     restart: unless-stopped
@@ -16,10 +16,11 @@ services:
       - traefik.enable=true
       - traefik.http.routers.mealie.rule=Host(`mealie.ntasler.de`)
       - traefik.http.routers.mealie.entrypoints=websecure
+      - traefik.http.routers.mealie.middlewares=public-chain@file
       - traefik.http.services.mealie.loadbalancer.server.port=3000
 
   mealie-api:
-    image: hkotel/mealie:api-v1.0.0beta-5
+    image: hkotel/mealie:api-nightly
     container_name: mealie-api
     deploy:
       resources:

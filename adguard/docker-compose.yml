@@ -17,6 +17,7 @@ services:
         - traefik.enable=true
         - traefik.http.routers.adguard.rule=Host(`adguard.ntasler.de`)
         - traefik.http.routers.adguard.entrypoints=websecure
+        - traefik.http.routers.adguard.middlewares=private-chain@file
         - traefik.http.services.adguard.loadbalancer.server.port=3000
       image: adguard/adguardhome
       networks:

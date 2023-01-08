@@ -17,6 +17,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.scrutiny.rule=Host(`scrutiny.ntasler.de`)
       - traefik.http.routers.scrutiny.entrypoints=websecure
+      - traefik.http.routers.scrutiny.middlewares=private-chain@file
       - traefik.http.services.scrutiny.loadbalancer.server.port=8080
     networks:
       - traefik-proxy

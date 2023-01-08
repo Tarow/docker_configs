@@ -47,6 +47,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.nextcloud.rule=Host(`next.ntasler.de`)"
       - "traefik.http.routers.nextcloud.entrypoints=websecure"
+      - "traefik.http.routers.nextcloud.middlewares=private-chain@file"
       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
     networks:
       - traefik-proxy

@@ -31,11 +31,13 @@ services:
 
       - "traefik.http.routers.gluetun.rule=Host(`gluetun.ntasler.de`)"
       - "traefik.http.routers.gluetun.entrypoints=websecure"
+      - "traefik.http.routers.gluetun.middlewares=private-chain@file"
       - "traefik.http.routers.gluetun.service=gluetun"
       - "traefik.http.services.gluetun.loadbalancer.server.port=8000"
 
       - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.ntasler.de`)"
       - "traefik.http.routers.qbittorrent.entrypoints=websecure"
+      - "traefik.http.routers.qbittorrent.middlewares=private-chain@file"
       - "traefik.http.routers.qbittorrent.service=qbittorrent"
       - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
 
@@ -62,9 +64,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.ntasler.de`)"
       - "traefik.http.routers.jellyfin.entrypoints=websecure"
-      - "traefik.http.routers.jellyfin.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.jellyfin.middlewares=private-chain@file"
       - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
-      - "traefik.docker.network=traefik-proxy"  
 
   sonarr:
     image: linuxserver/sonarr
@@ -83,9 +84,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.rule=Host(`sonarr.ntasler.de`)"
       - "traefik.http.routers.sonarr.entrypoints=websecure"
-      - "traefik.http.routers.sonarr.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.sonarr.middlewares=private-chain@file"
       - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
-      - "traefik.docker.network=traefik-proxy"
 
   radarr:
     image: linuxserver/radarr
@@ -104,9 +104,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.rule=Host(`radarr.ntasler.de`)"
       - "traefik.http.routers.radarr.entrypoints=websecure"
-      - "traefik.http.routers.radarr.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.radarr.middlewares=private-chain@file"
       - "traefik.http.services.radarr.loadbalancer.server.port=7878"
-      - "traefik.docker.network=traefik-proxy"
 
   bazarr:
     image: linuxserver/bazarr
@@ -125,9 +124,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.bazarr.rule=Host(`bazarr.ntasler.de`)"
       - "traefik.http.routers.bazarr.entrypoints=websecure"
-      - "traefik.http.routers.bazarr.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.bazarr.middlewares=private-chain@file"
       - "traefik.http.services.bazarr.loadbalancer.server.port=6767"
-      - "traefik.docker.network=traefik-proxy"
 
   jellyseerr:
     image: fallenbagel/jellyseerr
@@ -146,9 +144,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.jellyseerr.rule=Host(`jellyseerr.ntasler.de`)"
       - "traefik.http.routers.jellyseerr.entrypoints=websecure"
-      - "traefik.http.routers.jellyseerr.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.jellyseerr.middlewares=private-chain@file"
       - "traefik.http.services.jellyseerr.loadbalancer.server.port=5055"
-      - "traefik.docker.network=traefik-proxy"
 
   readarr:
     image: lscr.io/linuxserver/readarr:develop
@@ -167,9 +164,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.readarr.rule=Host(`readarr.ntasler.de`)"
       - "traefik.http.routers.readarr.entrypoints=websecure"
-      - "traefik.http.routers.readarr.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.readarr.middlewares=private-chain@file"
       - "traefik.http.services.readarr.loadbalancer.server.port=8787"
-      - "traefik.docker.network=traefik-proxy"
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
@@ -185,11 +181,9 @@ services:
       - ./prowlarr_config:/config
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=traefik-proxy"
       - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.ntasler.de`)"
       - "traefik.http.routers.prowlarr.entrypoints=websecure"
-      - "traefik.http.routers.prowlarr.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.prowlarr.service=prowlarr"
+      - "traefik.http.routers.prowlarr.middlewares=private-chain@file"
       - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
 
   qbittorrent:

@@ -27,6 +27,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.gitea.rule=Host(`git.ntasler.de`)
       - traefik.http.routers.gitea.entrypoints=websecure
+      - traefik.http.routers.gitea.middlewares=private-chain@file
       - traefik.http.services.gitea.loadbalancer.server.port=3000
 
       - traefik.tcp.routers.gitea-ssh.entrypoints=gitea

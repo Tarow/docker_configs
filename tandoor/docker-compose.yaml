@@ -47,6 +47,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.tandoor.rule=Host(`tandoor.ntasler.de`)
       - traefik.http.routers.tandoor.entrypoints=websecure
+      - traefik.http.routers.tandoor.middlewares=private-chain@file
       - traefik.http.services.tandoor.loadbalancer.server.port=80
 
 networks:

@@ -26,6 +26,8 @@ providers:
     exposedByDefault: false
     network: traefik-proxy
     defaultRule: Host(`{{ coalesce (index .Labels "com.docker.compose.service") (normalize .Name) }}.ntasler.de`)
+  file:
+    filename: /etc/traefik/dynamic-config.yml
 
 certificatesResolvers:
   letsencrypt:
@@ -35,5 +37,17 @@ certificatesResolvers:
       dnsChallenge:
         provider: cloudflare
 
+
+accessLog:
+  filePath: "/var/log/traefik/access.log"
+  bufferingSize: 50
+  format: json
+#  fields:
+#    defaultMode: keep
+#    headers:
+#      defaultMode: keep
+
 log:
   level: WARN
+
+

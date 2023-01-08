@@ -27,6 +27,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.wireguard.rule=Host(`wireguard.ntasler.de`)"
       - "traefik.http.routers.wireguard.entrypoints=websecure"
+      - "traefik.http.routers.wireguard.middlewares=private-chain@file"
       - "traefik.http.services.wireguard.loadbalancer.server.port=51821"
 
 networks:

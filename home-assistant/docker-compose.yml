@@ -12,4 +12,5 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.homeassistant.rule=Host(`ha.ntasler.de`)"
       - "traefik.http.routers.homeassistant.entrypoints=websecure"
+      - "traefik.http.routers.homeassistant.middlewares=private-chain@file"
       - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
