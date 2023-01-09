@@ -39,13 +39,7 @@ certificatesResolvers:
 
 
 accessLog:
-  filePath: "/var/log/traefik/access.log"
-  bufferingSize: 50
   format: json
-#  fields:
-#    defaultMode: keep
-#    headers:
-#      defaultMode: keep
 
 log:
   level: WARN
