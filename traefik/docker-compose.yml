@@ -26,6 +26,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./traefik.yml:/etc/traefik/traefik.yml:ro"
       - "./dynamic-config.yml:/etc/traefik/dynamic-config.yml"
+      - "./plugins:/plugins-local"
     networks:
       - traefik-proxy
     extra_hosts:

@@ -37,6 +37,10 @@ certificatesResolvers:
       dnsChallenge:
         provider: cloudflare
 
+experimental:
+  localPlugins:
+    geoblock:
+      moduleName: github.com/nscuro/traefik-plugin-geoblock
 
 accessLog:
   format: json
