@@ -1,8 +1,8 @@
 version: '3.7'
 services:
-  adguardhome:
+  adguard:
       image: adguard/adguardhome:latest
-      container_name: adguardhome
+      container_name: adguard
       restart: unless-stopped
       volumes:
         - ./work:/opt/adguardhome/work
