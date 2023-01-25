@@ -1,0 +1,25 @@
+version: "3"
+services:
+  shiori:
+    image: ghcr.io/go-shiori/shiori:dev
+    container_name: shiori
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - SHIORI_DIR=/data
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+    networks:
+      - default
+      - traefik-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.shiori.rule=Host(`shiori.ntasler.de`)
+      - traefik.http.routers.shiori.entrypoints=websecure
+      - traefik.http.routers.shiori.middlewares=private-chain@file
+      - traefik.http.services.shiori.loadbalancer.server.port=8080
+
+networks:
+  traefik-proxy:
+    external: true
