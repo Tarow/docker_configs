@@ -27,7 +27,8 @@ providers:
     network: traefik-proxy
     defaultRule: Host(`{{ coalesce (index .Labels "com.docker.compose.service") (normalize .Name) }}.ntasler.de`)
   file:
-    filename: /etc/traefik/dynamic-config.yml
+    directory: /dynamic
+    watch: true
 
 certificatesResolvers:
   letsencrypt:

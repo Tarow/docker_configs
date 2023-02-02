@@ -216,6 +216,8 @@ services:
     build: ./qbittorrent_checker
     container_name: qbittorrent-checker
     restart: unless-stopped
+    networks:
+      - traefik-proxy
 
 networks:
   traefik-proxy:

@@ -8,12 +8,12 @@ services:
         - ./work:/opt/adguardhome/work
         - ./conf:/opt/adguardhome/conf
       ports:
-        - 53:53/tcp
-        - 53:53/udp
-        - 67:67/udp
-        - 68:68/tcp
-        - 68:68/udp
-        - 853:853/tcp
+        - 10.1.1.99:53:53/tcp
+        - 10.1.1.99:53:53/udp
+        #- 10.1.1.99:67:67/udp # DHCP
+        #- 10.1.1.99:68:68/tcp # DHCP
+        #- 10.1.1.99:68:68/udp # DHCP
+        - 10.1.1.99:853:853/tcp
       labels:
         - traefik.enable=true
         - traefik.http.routers.adguard.rule=Host(`adguard.ntasler.de`)
