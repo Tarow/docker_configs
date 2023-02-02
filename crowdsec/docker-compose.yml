@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    restart: unless-stopped
+    environment:
+      GID: 1000
+      PUID: 1000
+      PGID: 1000
+      COLLECTIONS: "crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors LePresidente/authelia"
+    volumes:
+      - ./data:/var/lib/crowdsec/data
+      - ./config:/etc/crowdsec
+      - ./acquis.yaml:/etc/crowdsec/acquis.yaml
+      - ./http.yaml:/etc/crowdsec/notifications/http.yaml
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    labels:
+      - diun.enable=true
+
+  bouncer-traefik:
+    image: docker.io/fbonalair/traefik-crowdsec-bouncer:latest
+    container_name: bouncer-traefik
+    restart: unless-stopped
+    env_file:
+      - bouncer-traefik.env
+    environment:
+      CROWDSEC_AGENT_HOST: crowdsec:8080
+      GIN_MODE: release
+    networks:
+      - traefik-proxy
+      - default
+    depends_on:
+      - crowdsec
+    labels:
+      - diun.enable=true
+
+networks:
+  traefik-proxy:
+    external: true
