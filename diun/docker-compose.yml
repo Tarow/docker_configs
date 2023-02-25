@@ -16,7 +16,7 @@ services:
       - LOG_LEVEL=info
       - LOG_JSON=false
       - DIUN_WATCH_WORKERS=4
-      - DIUN_WATCH_SCHEDULE=0 18 * * *
+      - DIUN_WATCH_SCHEDULE=0 18 * * SUN
       - DIUN_PROVIDERS_DOCKER=true
     labels:
       - diun.enable=true

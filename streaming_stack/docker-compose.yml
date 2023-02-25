@@ -25,6 +25,7 @@ services:
       - VPN_TYPE=wireguard
 #      - SERVER_CITIES=Zurich
       - TZ=Europe/Berlin
+      - UPDATER_PERIOD=12h
       - HTTPPROXY=on
     labels:
       - "diun.enable=true"
@@ -152,26 +153,6 @@ services:
       - "traefik.http.routers.jellyseerr.entrypoints=websecure"
       - "traefik.http.routers.jellyseerr.middlewares=private-chain@file"
       - "traefik.http.services.jellyseerr.loadbalancer.server.port=5055"
-
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Berlin
-    volumes:
-      - ./readarr_config:/config
-      - /mnt/hdd1/media:/media
-    restart: unless-stopped
-    networks:
-      - traefik-proxy
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.readarr.rule=Host(`readarr.ntasler.de`)"
-      - "traefik.http.routers.readarr.entrypoints=websecure"
-      - "traefik.http.routers.readarr.middlewares=private-chain@file"
-      - "traefik.http.services.readarr.loadbalancer.server.port=8787"
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop

@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  affine:
+    image: ghcr.io/toeverything/affine-self-hosted:latest
+    container_name: affine
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - traefik-proxy
+    labels:
+      - diun.enable=true
+      - traefik.enable=true
+      - traefik.http.routers.affine.rule=Host(`affine.ntasler.de`)
+      - traefik.http.routers.affine.entrypoints=websecure
+      - traefik.http.routers.affine.middlewares=private-chain@file
+      - traefik.http.services.affine.loadbalancer.server.port=3000
+
+
+networks:
+  traefik-proxy:
+    external: true
