@@ -4,7 +4,8 @@ services:
     restart: unless-stopped
     image: 'louislam/uptime-kuma:latest'
     volumes:
-      - './uptime-kuma:/app/data'
+      - ./uptime-kuma:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     container_name: uptime-kuma
     labels:
       - "diun.enable=true"
