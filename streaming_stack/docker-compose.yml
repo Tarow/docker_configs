@@ -23,12 +23,10 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=mullvad
       - VPN_TYPE=wireguard
-#      - SERVER_CITIES=Zurich
       - TZ=Europe/Berlin
       - UPDATER_PERIOD=12h
       - HTTPPROXY=on
     labels:
-      - "diun.enable=true"
       - "traefik.enable=true"
 
       - "traefik.http.routers.gluetun.rule=Host(`gluetun.ntasler.de`)"
@@ -63,7 +61,6 @@ services:
     networks:
       - traefik-proxy
     labels:
-      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.ntasler.de`)"
       - "traefik.http.routers.jellyfin.entrypoints=websecure"
@@ -84,7 +81,6 @@ services:
     networks:
       - traefik-proxy
     labels:
-      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.rule=Host(`sonarr.ntasler.de`)"
       - "traefik.http.routers.sonarr.entrypoints=websecure"
@@ -105,7 +101,6 @@ services:
     networks:
       - traefik-proxy
     labels:
-      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.rule=Host(`radarr.ntasler.de`)"
       - "traefik.http.routers.radarr.entrypoints=websecure"
@@ -126,7 +121,6 @@ services:
     networks:
       - traefik-proxy
     labels:
-      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.bazarr.rule=Host(`bazarr.ntasler.de`)"
       - "traefik.http.routers.bazarr.entrypoints=websecure"
@@ -147,7 +141,6 @@ services:
     networks:
       - traefik-proxy
     labels:
-      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.jellyseerr.rule=Host(`jellyseerr.ntasler.de`)"
       - "traefik.http.routers.jellyseerr.entrypoints=websecure"
@@ -167,7 +160,6 @@ services:
     volumes:
       - ./prowlarr_config:/config
     labels:
-      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.ntasler.de`)"
       - "traefik.http.routers.prowlarr.entrypoints=websecure"
@@ -187,8 +179,6 @@ services:
       - ./qbittorrent_config:/config
       - /mnt/hdd1/media:/media
     network_mode: 'service:gluetun'
-    labels:
-      - "diun.enable=true"
     depends_on:
       gluetun:
         condition: service_healthy

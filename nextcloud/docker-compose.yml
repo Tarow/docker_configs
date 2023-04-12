@@ -34,8 +34,6 @@ services:
     # POSTGRES_PASSWORD=
     # POSTGRES_DB=
     # POSTGRES_USER=
-    labels:
-      - "diun.enable=true"
     depends_on:
       - db
       - redis

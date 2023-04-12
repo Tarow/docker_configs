@@ -18,6 +18,9 @@ entryPoints:
   gitea:
     address: ":2222"
 
+serversTransport:
+  insecureSkipVerify: true
+
 api:
   dashboard: true
 

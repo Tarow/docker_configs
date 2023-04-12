@@ -24,7 +24,6 @@ services:
     networks:
       - traefik-proxy
     labels:
-      - "diun.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.wireguard.rule=Host(`wireguard.ntasler.de`)"
       - "traefik.http.routers.wireguard.entrypoints=websecure"

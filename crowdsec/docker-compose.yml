@@ -16,8 +16,6 @@ services:
       - ./acquis.yaml:/etc/crowdsec/acquis.yaml
       - ./http.yaml:/etc/crowdsec/notifications/http.yaml
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
-    labels:
-      - diun.enable=true
 
   bouncer-traefik:
     image: docker.io/fbonalair/traefik-crowdsec-bouncer:latest
@@ -33,8 +31,6 @@ services:
       - default
     depends_on:
       - crowdsec
-    labels:
-      - diun.enable=true
 
 networks:
   traefik-proxy:

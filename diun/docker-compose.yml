@@ -19,4 +19,3 @@ services:
       - DIUN_WATCH_SCHEDULE=0 18 * * SUN
       - DIUN_PROVIDERS_DOCKER=true
     labels:
-      - diun.enable=true

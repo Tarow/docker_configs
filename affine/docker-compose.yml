@@ -9,7 +9,6 @@ services:
     networks:
       - traefik-proxy
     labels:
-      - diun.enable=true
       - traefik.enable=true
       - traefik.http.routers.affine.rule=Host(`affine.ntasler.de`)
       - traefik.http.routers.affine.entrypoints=websecure

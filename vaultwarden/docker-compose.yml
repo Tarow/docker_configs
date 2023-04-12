@@ -7,7 +7,6 @@ services:
     volumes:
       - './data/:/data/'
     labels:
-      - diun.enable=true
       - traefik.enable=true
       - traefik.http.routers.vaultwarden.rule=Host(`vw.ntasler.de`)
       - traefik.http.routers.vaultwarden.entrypoints=websecure

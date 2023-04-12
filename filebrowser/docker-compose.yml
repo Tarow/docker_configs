@@ -13,7 +13,6 @@ services:
       - PUID=1000
       - PGID=1000
     labels:
-      - diun.enable=true
       - traefik.enable=true
       - traefik.http.routers.filebrowser.entrypoints=websecure
       - traefik.http.routers.filebrowser.middlewares=private-chain@file
