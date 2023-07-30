@@ -21,7 +21,7 @@ services:
     # WIREGUARD_ADDRESSES=
     # FIREWALL_VPN_INPUT_PORTS=
     environment:
-      - VPN_SERVICE_PROVIDER=mullvad
+      - VPN_SERVICE_PROVIDER=airvpn
       - VPN_TYPE=wireguard
       - TZ=Europe/Berlin
       - UPDATER_PERIOD=12h
