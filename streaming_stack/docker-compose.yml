@@ -183,12 +183,12 @@ services:
       gluetun:
         condition: service_healthy
 
-  qbittorrent-checker:
-    build: ./qbittorrent_checker
-    container_name: qbittorrent-checker
-    restart: unless-stopped
-    networks:
-      - traefik-proxy
+#  qbittorrent-checker:
+#    build: ./qbittorrent_checker
+#    container_name: qbittorrent-checker
+#    restart: unless-stopped
+#    networks:
+#      - traefik-proxy
 
 networks:
   traefik-proxy:
