@@ -10,11 +10,13 @@ services:
       PUID: 1000
       PGID: 1000
       COLLECTIONS: "crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors LePresidente/authelia"
+    networks:
+      - traefik-proxy # In order to reach ntfy for notifications
     volumes:
       - ./data:/var/lib/crowdsec/data
       - ./config:/etc/crowdsec
       - ./acquis.yaml:/etc/crowdsec/acquis.yaml
-      - ./http.yaml:/etc/crowdsec/notifications/http.yaml
+      - ./http-ntfy.yaml:/etc/crowdsec/notifications/http.yaml
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
 
   bouncer-traefik:
@@ -28,7 +30,6 @@ services:
       GIN_MODE: release
     networks:
       - traefik-proxy
-      - default
     depends_on:
       - crowdsec
 
