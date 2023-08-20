@@ -1,0 +1,21 @@
+version: "3"
+services:
+  openbooks:
+    container_name: openbooks
+    image: evanbuss/openbooks:latest
+    restart: unless-stopped
+    volumes:
+      - ./books:/books
+    command: --name donamix_4569981 --persist -s "irc.irchighway.net:9999"
+    networks:
+      - traefik-proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.openbooks.rule=Host(`openbooks.ntasler.de`)"
+      - "traefik.http.routers.openbooks.entrypoints=websecure"
+      - "traefik.http.routers.openbooks.middlewares=private-chain@file"
+      - "traefik.http.services.openbooks.loadbalancer.server.port=80"
+
+networks:
+  traefik-proxy:
+    external: true
