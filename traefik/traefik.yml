@@ -45,9 +45,10 @@ certificatesResolvers:
           - 8.8.8.8:53
 
 experimental:
-  localPlugins:
+  plugins:
     geoblock:
       moduleName: github.com/nscuro/traefik-plugin-geoblock
+      version: v0.11.0
 
 accessLog:
   format: json
