@@ -23,6 +23,7 @@ services:
 
   postgres:
     image: postgres:12
+    restart: unless-stopped
     volumes:
       - ./db:/var/lib/postgresql/data
     environment:
