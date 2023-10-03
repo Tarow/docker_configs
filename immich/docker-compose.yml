@@ -100,7 +100,7 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.immich.rule=Host(`immich.ntasler.de`)
+      - traefik.http.routers.immich.rule=Host(`immich.nopshift.de`)
       - traefik.http.routers.immich.entrypoints=websecure
       - traefik.http.routers.immich.middlewares=private-chain@file
       - traefik.http.services.immich.loadbalancer.server.port=8080

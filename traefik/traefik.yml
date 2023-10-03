@@ -12,11 +12,9 @@ entryPoints:
       tls:
         certResolver: letsencrypt
         domains:
-          - main: ntasler.de
+          - main: nopshift.de
             sans: 
-              - "*.ntasler.de"
-  gitea:
-    address: ":2222"
+              - "*.nopshift.de"
 
 serversTransport:
   insecureSkipVerify: true
@@ -28,7 +26,7 @@ providers:
   docker:
     exposedByDefault: false
     network: traefik-proxy
-    defaultRule: Host(`{{ coalesce (index .Labels "com.docker.compose.service") (normalize .Name) }}.ntasler.de`)
+    defaultRule: Host(`{{ coalesce (index .Labels "com.docker.compose.service") (normalize .Name) }}.nopshift.de`)
   file:
     directory: /dynamic
     watch: true
@@ -36,7 +34,7 @@ providers:
 certificatesResolvers:
   letsencrypt:
     acme:
-      email: mail@ntasler.de
+      email: mail@nopshift.de
       storage: /letsencrypt/acme.json
       dnsChallenge:
         provider: cloudflare

@@ -29,13 +29,13 @@ services:
     labels:
       - "traefik.enable=true"
 
-      - "traefik.http.routers.gluetun.rule=Host(`gluetun.ntasler.de`)"
+      - "traefik.http.routers.gluetun.rule=Host(`gluetun.nopshift.de`)"
       - "traefik.http.routers.gluetun.entrypoints=websecure"
       - "traefik.http.routers.gluetun.middlewares=private-chain@file"
       - "traefik.http.routers.gluetun.service=gluetun"
       - "traefik.http.services.gluetun.loadbalancer.server.port=8000"
 
-      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.ntasler.de`)"
+      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.nopshift.de`)"
       - "traefik.http.routers.qbittorrent.entrypoints=websecure"
       - "traefik.http.routers.qbittorrent.middlewares=private-chain@file"
       - "traefik.http.routers.qbittorrent.service=qbittorrent"
@@ -48,7 +48,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Berlin
-      - JELLYFIN_PublishedServerUrl=jellyfin.ntasler.de
+      - JELLYFIN_PublishedServerUrl=jellyfin.nopshift.de
     volumes:
       - ./jellyfin_config:/config
       - /mnt/hdd1/media:/media
@@ -56,13 +56,13 @@ services:
       - /dev/dri:/dev/dri
     ports:
       - 7359:7359/udp # Local network discovery
-      - 1900:1900/udp # DLNA discovery
+     # - 1900:1900/udp # DLNA discovery
     restart: unless-stopped
     networks:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.ntasler.de`)"
+      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.nopshift.de`)"
       - "traefik.http.routers.jellyfin.entrypoints=websecure"
       - "traefik.http.routers.jellyfin.middlewares=private-chain@file"
       - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
@@ -82,7 +82,7 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sonarr.rule=Host(`sonarr.ntasler.de`)"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.nopshift.de`)"
       - "traefik.http.routers.sonarr.entrypoints=websecure"
       - "traefik.http.routers.sonarr.middlewares=private-chain@file"
       - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
@@ -102,7 +102,7 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.radarr.rule=Host(`radarr.ntasler.de`)"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.nopshift.de`)"
       - "traefik.http.routers.radarr.entrypoints=websecure"
       - "traefik.http.routers.radarr.middlewares=private-chain@file"
       - "traefik.http.services.radarr.loadbalancer.server.port=7878"
@@ -122,7 +122,7 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.bazarr.rule=Host(`bazarr.ntasler.de`)"
+      - "traefik.http.routers.bazarr.rule=Host(`bazarr.nopshift.de`)"
       - "traefik.http.routers.bazarr.entrypoints=websecure"
       - "traefik.http.routers.bazarr.middlewares=private-chain@file"
       - "traefik.http.services.bazarr.loadbalancer.server.port=6767"
@@ -142,7 +142,7 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.jellyseerr.rule=Host(`jellyseerr.ntasler.de`)"
+      - "traefik.http.routers.jellyseerr.rule=Host(`jellyseerr.nopshift.de`)"
       - "traefik.http.routers.jellyseerr.entrypoints=websecure"
       - "traefik.http.routers.jellyseerr.middlewares=private-chain@file"
       - "traefik.http.services.jellyseerr.loadbalancer.server.port=5055"
@@ -161,7 +161,7 @@ services:
       - ./prowlarr_config:/config
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.ntasler.de`)"
+      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.nopshift.de`)"
       - "traefik.http.routers.prowlarr.entrypoints=websecure"
       - "traefik.http.routers.prowlarr.middlewares=private-chain@file"
       - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"

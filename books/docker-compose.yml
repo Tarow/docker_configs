@@ -5,7 +5,7 @@ services:
     container_name: audiobookshelf
     user: "1000:1000"
     volumes:
-      - /mnt/hdd1/media/audiobooks:/audiobooks
+     # - /mnt/hdd1/media/audiobooks:/audiobooks
       - ./podcasts:/podcasts
       - ./metadata:/metadata
       - ./config:/config
@@ -14,9 +14,9 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.audiobookshelf.rule=Host(`audiobookshelf.ntasler.de`)
+      - traefik.http.routers.audiobookshelf.rule=Host(`audiobookshelf.nopshift.de`)
       - traefik.http.routers.audiobookshelf.entrypoints=websecure
-      - traefik.http.routers.audiobookshelf.middlewares=public-chain@file
+      - traefik.http.routers.audiobookshelf.middlewares=private-chain@file
       - traefik.http.services.audiobookshelf.loadbalancer.server.port=80
 
   readarr-ebooks:
@@ -34,7 +34,7 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.readarr-ebooks.rule=Host(`readarr-ebooks.ntasler.de`)"
+      - "traefik.http.routers.readarr-ebooks.rule=Host(`readarr-ebooks.nopshift.de`)"
       - "traefik.http.routers.readarr-ebooks.entrypoints=websecure"
       - "traefik.http.routers.readarr-ebooks.middlewares=private-chain@file"
       - "traefik.http.services.readarr-ebooks.loadbalancer.server.port=8787"
@@ -54,7 +54,7 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.readarr-audiobooks.rule=Host(`readarr-audiobooks.ntasler.de`)"
+      - "traefik.http.routers.readarr-audiobooks.rule=Host(`readarr-audiobooks.nopshift.de`)"
       - "traefik.http.routers.readarr-audiobooks.entrypoints=websecure"
       - "traefik.http.routers.readarr-audiobooks.middlewares=private-chain@file"
       - "traefik.http.services.readarr-audiobooks.loadbalancer.server.port=8787"

@@ -17,6 +17,7 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
+      - traefik.http.routers.calibre.rule=Host(`calibre.nopshift.de`)
       - traefik.http.routers.calibre.entrypoints=websecure
       - traefik.http.routers.calibre.middlewares=private-chain@file
       - traefik.http.services.calibre.loadbalancer.server.port=8083

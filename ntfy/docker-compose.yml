@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.routers.ntfy.rule=Host(`ntfy.ntasler.de`)
+      - traefik.http.routers.ntfy.rule=Host(`ntfy.nopshift.de`)
       - traefik.http.routers.ntfy.entrypoints=websecure
       - traefik.http.routers.ntfy.middlewares=public-chain@file
       - traefik.http.services.ntfy.loadbalancer.server.port=80

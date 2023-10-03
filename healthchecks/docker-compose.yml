@@ -16,7 +16,7 @@ services:
       - default
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.healthchecks.rule=Host(`healthchecks.ntasler.de`)"
+      - "traefik.http.routers.healthchecks.rule=Host(`healthchecks.nopshift.de`)"
       - "traefik.http.routers.healthchecks.entrypoints=websecure"
       - "traefik.http.routers.healthchecks.middlewares=private-chain@file"
       - "traefik.http.services.healthchecks.loadbalancer.server.port=8000"

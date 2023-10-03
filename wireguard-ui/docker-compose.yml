@@ -23,28 +23,28 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.wireguard-ui.rule=Host(`wg.ntasler.de`)"
+      - "traefik.http.routers.wireguard-ui.rule=Host(`wg.nopshift.de`)"
       - "traefik.http.routers.wireguard-ui.entrypoints=websecure"
       - "traefik.http.routers.wireguard-ui.middlewares=private-chain@file"
       - "traefik.http.services.wireguard-ui.loadbalancer.server.port=5000"
 
   # WireGuard-UI service
-  wireguard-ui:
-    image: ngoduykhanh/wireguard-ui:latest
-    container_name: wireguard-ui
-    restart: unless-stopped
-    depends_on:
-      - wireguard
-    cap_add:
-      - NET_ADMIN
-    # Use the network of the 'wireguard' service
-    # This enables to show active clients in the status page
-    network_mode: service:wireguard
-    env_file:
-      - .env
-    volumes:
-      - ./db:/app/db
-      - ./config:/etc/wireguard
+  # wireguard-ui:
+  #   image: ngoduykhanh/wireguard-ui:latest
+  #   container_name: wireguard-ui
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - wireguard
+  #   cap_add:
+  #     - NET_ADMIN
+  #   # Use the network of the 'wireguard' service
+  #   # This enables to show active clients in the status page
+  #   network_mode: service:wireguard
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - ./db:/app/db
+  #     - ./config:/etc/wireguard
 
 networks:
   traefik-proxy:

@@ -13,6 +13,7 @@ services:
       - FETCH_WORKERS=1
     labels:
       - traefik.enable=true
+      - traefik.http.routers.changedetection.rule=Host(`changedetection.nopshift.de`)
       - traefik.http.routers.changedetection.entrypoints=websecure
       - traefik.http.routers.changedetection.middlewares=private-chain@file
       - traefik.http.services.changedetection.loadbalancer.server.port=5000
