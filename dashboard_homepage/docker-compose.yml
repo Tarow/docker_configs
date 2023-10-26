@@ -1,13 +1,14 @@
 version: '3.3'
 services:
   homepage:
-    image: ghcr.io/benphelps/homepage:latest
+    image: ghcr.io/gethomepage/homepage:latest
     restart: unless-stopped
     container_name: homepage
     volumes:
       - ./config:/app/config
       - /mnt/hdd1:/mnt/hdd1:ro
       - ./icons:/app/public/icons
+      - ./images:/app/public/images
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - PUID=1000

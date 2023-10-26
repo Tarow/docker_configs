@@ -18,6 +18,7 @@ services:
       - ./acquis.yaml:/etc/crowdsec/acquis.yaml
       - ./http-ntfy.yaml:/etc/crowdsec/notifications/http.yaml
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - './immich-whitelist.yaml:/etc/crowdsec/parsers/s02-enrich/immich-whitelist.yaml'
 
   bouncer-traefik:
     image: docker.io/fbonalair/traefik-crowdsec-bouncer:latest

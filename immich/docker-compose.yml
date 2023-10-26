@@ -102,7 +102,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.immich.rule=Host(`immich.ntasler.de`)
       - traefik.http.routers.immich.entrypoints=websecure
-      - traefik.http.routers.immich.middlewares=private-chain@file
+      - traefik.http.routers.immich.middlewares=public-chain@file
       - traefik.http.services.immich.loadbalancer.server.port=8080
 
 networks:

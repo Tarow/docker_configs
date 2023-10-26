@@ -15,6 +15,7 @@ services:
       - GF_AUTH_DISABLE_LOGIN_FORM=true
     networks:
       - traefik-proxy
+      - default
     labels:
       - traefik.enable=true
       - traefik.http.routers.grafana.rule=Host(`grafana.ntasler.de`)
@@ -31,15 +32,6 @@ services:
     volumes:
       - './loki/data:/loki'
       - './loki/local-config.yaml:/etc/loki/local-config.yaml'
-    networks:
-      - traefik-proxy
-      - default
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.loki.rule=Host(`loki.ntasler.de`)
-      - traefik.http.routers.loki.entrypoints=websecure
-      - traefik.http.routers.loki.middlewares=private-chain@file
-      - traefik.http.services.loki.loadbalancer.server.port=3100
 
   promtail:
     image: grafana/promtail:latest
