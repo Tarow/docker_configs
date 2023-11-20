@@ -14,7 +14,7 @@ services:
       - default
     labels:
       - traefik.enable=true
-      - traefik.http.routers.mealie.rule=Host(`mealie.nopshift.de`)
+      - traefik.http.routers.mealie.rule=Host(`mealie.relsat.de`)
       - traefik.http.routers.mealie.entrypoints=websecure
       - traefik.http.routers.mealie.middlewares=private-chain@file
       - traefik.http.services.mealie.loadbalancer.server.port=3000
@@ -35,7 +35,7 @@ services:
       - TZ=Europe/Berlin
       - MAX_WORKERS=1
       - WEB_CONCURRENCY=1
-      - BASE_URL=https://mealie.nopshift.de
+      - BASE_URL=https://mealie.relsat.de
     restart: unless-stopped
     networks:
       - default

@@ -16,7 +16,7 @@ services:
         - 192.168.178.2:853:853/tcp
       labels:
         - traefik.enable=true
-        - traefik.http.routers.adguard.rule=Host(`adguard.nopshift.de`)
+        - traefik.http.routers.adguard.rule=Host(`adguard.relsat.de`)
         - traefik.http.routers.adguard.entrypoints=websecure
         - traefik.http.routers.adguard.middlewares=private-chain@file
         - traefik.http.services.adguard.loadbalancer.server.port=3000

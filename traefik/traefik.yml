@@ -12,9 +12,9 @@ entryPoints:
       tls:
         certResolver: letsencrypt
         domains:
-          - main: nopshift.de
+          - main: relsat.de
             sans: 
-              - "*.nopshift.de"
+              - "*.relsat.de"
 
 serversTransport:
   insecureSkipVerify: true
@@ -26,7 +26,7 @@ providers:
   docker:
     exposedByDefault: false
     network: traefik-proxy
-    defaultRule: Host(`{{ coalesce (index .Labels "com.docker.compose.service") (normalize .Name) }}.nopshift.de`)
+    defaultRule: Host(`{{ coalesce (index .Labels "com.docker.compose.service") (normalize .Name) }}.relsat.de`)
   file:
     directory: /dynamic
     watch: true
@@ -34,7 +34,7 @@ providers:
 certificatesResolvers:
   letsencrypt:
     acme:
-      email: mail@nopshift.de
+      email: mail@relsat.de
       storage: /letsencrypt/acme.json
       dnsChallenge:
         provider: cloudflare
@@ -52,6 +52,6 @@ accessLog:
   format: json
 
 log:
-  level: WARN
+  level: INFO
 
 

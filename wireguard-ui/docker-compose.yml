@@ -23,7 +23,7 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.wireguard-ui.rule=Host(`wg.nopshift.de`)"
+      - "traefik.http.routers.wireguard-ui.rule=Host(`wg.relsat.de`)"
       - "traefik.http.routers.wireguard-ui.entrypoints=websecure"
       - "traefik.http.routers.wireguard-ui.middlewares=private-chain@file"
       - "traefik.http.services.wireguard-ui.loadbalancer.server.port=5000"

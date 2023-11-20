@@ -18,7 +18,7 @@ services:
       - default
     labels:
       - traefik.enable=true
-      - traefik.http.routers.grafana.rule=Host(`grafana.nopshift.de`)
+      - traefik.http.routers.grafana.rule=Host(`grafana.relsat.de`)
       - traefik.http.routers.grafana.middlewares=private-chain@file
       - traefik.http.routers.grafana.entrypoints=websecure
       - traefik.http.services.grafana.loadbalancer.server.port=3000

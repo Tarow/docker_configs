@@ -14,7 +14,7 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.audiobookshelf.rule=Host(`audiobookshelf.nopshift.de`)
+      - traefik.http.routers.audiobookshelf.rule=Host(`audiobookshelf.relsat.de`)
       - traefik.http.routers.audiobookshelf.entrypoints=websecure
       - traefik.http.routers.audiobookshelf.middlewares=private-chain@file
       - traefik.http.services.audiobookshelf.loadbalancer.server.port=80
@@ -34,7 +34,7 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.readarr-ebooks.rule=Host(`readarr-ebooks.nopshift.de`)"
+      - "traefik.http.routers.readarr-ebooks.rule=Host(`readarr-ebooks.relsat.de`)"
       - "traefik.http.routers.readarr-ebooks.entrypoints=websecure"
       - "traefik.http.routers.readarr-ebooks.middlewares=private-chain@file"
       - "traefik.http.services.readarr-ebooks.loadbalancer.server.port=8787"
@@ -54,7 +54,7 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.readarr-audiobooks.rule=Host(`readarr-audiobooks.nopshift.de`)"
+      - "traefik.http.routers.readarr-audiobooks.rule=Host(`readarr-audiobooks.relsat.de`)"
       - "traefik.http.routers.readarr-audiobooks.entrypoints=websecure"
       - "traefik.http.routers.readarr-audiobooks.middlewares=private-chain@file"
       - "traefik.http.services.readarr-audiobooks.loadbalancer.server.port=8787"

@@ -14,7 +14,7 @@ services:
       PGID: 1000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.authelia.rule=Host(`auth.nopshift.de`)
+      - traefik.http.routers.authelia.rule=Host(`auth.relsat.de`)
       - traefik.http.routers.authelia.entrypoints=websecure
       - traefik.http.routers.authelia.middlewares=public-chain@file
       - traefik.http.services.authelia.loadbalancer.server.port=9091

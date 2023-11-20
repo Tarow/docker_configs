@@ -10,7 +10,7 @@ services:
     network_mode: host
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homeassistant.rule=Host(`ha.nopshift.de`)"
+      - "traefik.http.routers.homeassistant.rule=Host(`ha.relsat.de`)"
       - "traefik.http.routers.homeassistant.entrypoints=websecure"
       - "traefik.http.routers.homeassistant.middlewares=private-chain@file"
       - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
