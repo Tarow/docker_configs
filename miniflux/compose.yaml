@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+  miniflux:
+    image: miniflux/miniflux:latest
+    container_name: miniflux
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgres://miniflux:secret@db/miniflux?sslmode=disable
+      - RUN_MIGRATIONS=1
+      - CREATE_ADMIN=1
+      - BASE_URL=https://miniflux.ntasler.de
+    networks:
+      - default
+      - traefik-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.miniflux.entrypoints=websecure
+      - traefik.http.routers.miniflux.rule=Host(`miniflux.ntasler.de`)
+      - traefik.http.routers.miniflux.middlewares=private-chain@file
+      - traefik.http.services.miniflux.loadbalancer.server.port=8080
+
+  db:
+    image: postgres:15
+    container_name: miniflux-db
+    env_file:
+      - .env
+    volumes:
+      - ./miniflux-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "miniflux"]
+      interval: 10s
+      start_period: 30s
+
+networks:
+  traefik-proxy:
+    external: true

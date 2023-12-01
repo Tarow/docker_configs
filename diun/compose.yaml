@@ -1,0 +1,21 @@
+version: "3.5"
+
+services:
+  diun:
+    image: crazymax/diun:latest
+    container_name: diun
+    restart: unless-stopped
+    command: serve
+    volumes:
+      - "./data:/data"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    env_file:
+      - diun.env
+    environment:
+      - TZ=Europe/Berlin
+      - LOG_LEVEL=info
+      - LOG_JSON=false
+      - DIUN_WATCH_WORKERS=4
+      - DIUN_WATCH_SCHEDULE=0 18 * * SUN
+      - DIUN_PROVIDERS_DOCKER=true
+    labels:

@@ -1,0 +1,31 @@
+---
+version: "2.1"
+services:
+  webtop:
+    image: lscr.io/linuxserver/webtop:ubuntu-mate
+    container_name: webtop
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      - TITLE=Webtop 
+    volumes:
+      - ./config:/config
+    shm_size: "1gb"
+    devices:
+      - /dev/dri:/dev/dri 
+    restart: unless-stopped
+    networks:
+      - traefik-proxy   
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.webtop.rule=Host(`webtop.ntasler.de`) || Host(`kasm.ntasler.de`)
+      - traefik.http.routers.webtop.entrypoints=websecure
+      - traefik.http.routers.webtop.middlewares=public-chain@file,authelia@file
+      - traefik.http.services.webtop.loadbalancer.server.port=3000
+
+networks:
+  traefik-proxy:
+    external: true

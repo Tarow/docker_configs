@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  kopia:
+    image: kopia/kopia:latest
+    hostname: Hostname
+    container_name: kopia
+    restart: unless-stopped
+     # Setup the server that provides the web gui
+    command:
+      - server
+      - start
+      - --disable-csrf-token-checks
+      - --insecure
+      - --address=0.0.0.0:51515
+      - --server-username=${SERVER_USERNAME}
+      - --server-password=${SERVER_PASSWORD}
+    env_file:
+      - .env
+    volumes:
+      - ./config:/app/config
+      #- ./cache:/app/cache
+      - ./logs:/app/logs
+      # Mount local folders to snapshot
+      - /home/niklas/docker:/data/docker:ro
+      # Mount repository location
+      - /mnt/hdd1/backups/kopia:/repository
+      # Mount path for browsing mounted snaphots
+      - ./tmp:/tmp:shared
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.kopia.rule=Host(`kopia.ntasler.de`)
+      - traefik.http.routers.kopia.entrypoints=websecure
+      - traefik.http.routers.kopia.middlewares=private-chain@file
+      - traefik.http.services.kopia.loadbalancer.server.port=51515
+    networks:
+      - traefik-proxy
+
+networks:
+  traefik-proxy:
+    external: true

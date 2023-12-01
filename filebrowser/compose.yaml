@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:s6
+    restart: unless-stopped
+    container_name: filebrowser
+    volumes:
+      - /mnt/hdd1/:/srv/hdd/
+      - /home/niklas:/srv/home/niklas
+      - ./config/database:/database
+      - ./config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.filebrowser.entrypoints=websecure
+      - traefik.http.routers.filebrowser.middlewares=private-chain@file
+      - traefik.http.services.filebrowser.loadbalancer.server.port=80
+    networks:
+      - traefik-proxy
+
+networks:
+  traefik-proxy:
+    external: true

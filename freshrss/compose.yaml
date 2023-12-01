@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  freshrss:
+    image: freshrss/freshrss:latest
+    container_name: freshrss
+    hostname: freshrss
+    restart: unless-stopped
+    volumes:
+      - ./data:/var/www/FreshRSS/data
+      - ./extensions:/var/www/FreshRSS/extensions
+    environment:
+      TZ: Europe/Berlin
+      CRON_MIN: '3,33'
+      TRUSTED_PROXY: 172.16.0.1/12
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.freshrss.entrypoints=websecure
+      - traefik.http.routers.freshrss.rule=Host(`rss.ntasler.de`)
+      - traefik.http.routers.freshrss.middlewares=private-chain@file
+      - traefik.http.services.freshrss.loadbalancer.server.port=80
+    networks:
+      - traefik-proxy
+
+networks:
+  traefik-proxy:
+    external: true

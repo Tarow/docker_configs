@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+  changedetection:
+    container_name: changedetection
+    image: dgtlmoon/changedetection.io
+    restart: unless-stopped
+    volumes:
+      - ./data:/datastore
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/?stealth=1&--disable-web-security=true
+      - FETCH_WORKERS=1
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.changedetection.entrypoints=websecure
+      - traefik.http.routers.changedetection.middlewares=private-chain@file
+      - traefik.http.services.changedetection.loadbalancer.server.port=5000
+    networks:
+      - default
+      - traefik-proxy
+
+  playwright-chrome:
+    container_name: playwright-chrome
+    image: browserless/chrome
+    restart: unless-stopped
+
+networks:
+  traefik-proxy:
+    external: true

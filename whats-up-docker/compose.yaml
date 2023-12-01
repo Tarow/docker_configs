@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  whatsupdocker:
+    image: fmartinou/whats-up-docker
+    container_name: whats-up-docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    environment:
+      - WUD_WATCHER_LOCAL_CRON=0 0 * * *
+    networks:
+      - traefik-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.wud.entrypoints=websecure
+      - traefik.http.routers.wud.rule=Host(`wud.ntasler.de`)
+      - traefik.http.routers.wud.middlewares=private-chain@file
+      - traefik.http.services.wud.loadbalancer.server.port=3000
+
+networks:
+  traefik-proxy:
+    external: true
