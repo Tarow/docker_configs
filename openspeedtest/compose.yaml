@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  speedtest:
+    restart: unless-stopped
+    container_name: openspeedtest
+    image: openspeedtest/latest
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.speedtest.rule=Host(`speedtest.relsat.de`)
+      - traefik.http.routers.speedtest.entrypoints=websecure
+      - traefik.http.routers.speedtest.middlewares=public-chain@file
+      - traefik.http.services.speedtest.loadbalancer.server.port=3000
+    networks:
+      - traefik-proxy
+
+networks:
+  traefik-proxy:
+    external: true

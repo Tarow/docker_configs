@@ -16,6 +16,15 @@ services:
       - database
       - typesense
     restart: unless-stopped
+    networks:
+      - traefik-proxy
+      - default
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.immich.rule=Host(`immich.relsat.de`)
+      - traefik.http.routers.immich.entrypoints=websecure
+      - traefik.http.routers.immich.middlewares=private-chain@file
+      - traefik.http.services.immich.loadbalancer.server.port=3001
 
   immich-microservices:
     container_name: immich_microservices
@@ -38,13 +47,6 @@ services:
     image: ghcr.io/immich-app/immich-machine-learning:release
     volumes:
       - ./model-cache:/cache
-    env_file:
-      - .env
-    restart: unless-stopped
-
-  immich-web:
-    container_name: immich_web
-    image: ghcr.io/immich-app/immich-web:release
     env_file:
       - .env
     restart: unless-stopped
@@ -78,23 +80,6 @@ services:
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     restart: unless-stopped
-
-  immich-proxy:
-    container_name: immich_proxy
-    image: ghcr.io/immich-app/immich-proxy:release
-    depends_on:
-      - immich-server
-      - immich-web
-    restart: unless-stopped
-    networks:
-      - default
-      - traefik-proxy
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.immich.rule=Host(`immich.relsat.de`)
-      - traefik.http.routers.immich.entrypoints=websecure
-      - traefik.http.routers.immich.middlewares=private-chain@file
-      - traefik.http.services.immich.loadbalancer.server.port=8080
 
 networks:
   traefik-proxy:

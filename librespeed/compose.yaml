@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  librespeed:
+    image: lscr.io/linuxserver/librespeed:latest
+    container_name: librespeed
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      - PASSWORD=$PASSWORD
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.speedtest.rule=Host(`speedtest.relsat.de`)
+      - traefik.http.routers.speedtest.entrypoints=websecure
+      - traefik.http.routers.speedtest.middlewares=private-chain@file
+      - traefik.http.services.speedtest.loadbalancer.server.port=80
+    networks:
+      - traefik-proxy
+
+networks:
+  traefik-proxy:
+    external: true
