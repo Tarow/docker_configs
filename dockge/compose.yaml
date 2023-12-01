@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  dockge:
+    image: louislam/dockge:latest
+    restart: unless-stopped
+    ports:
+      # Host Port : Container Port
+      - 5001:5001
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/app/data
+      - /home/niklas/docker:/home/niklas/docker
+    environment:
+      - DOCKGE_STACKS_DIR=/home/niklas/docker
+    networks:
+      - traefik-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dockge.rule=Host(`dockge.ntasler.de`)
+      - traefik.http.routers.dockge.entrypoints=websecure
+      - traefik.http.routers.dockge.middlewares=private-chain@file
+      - traefik.http.services.dockge.loadbalancer.server.port=5001
+
+networks:
+  traefik-proxy:
+    external: true
