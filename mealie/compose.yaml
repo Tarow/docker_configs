@@ -1,5 +1,4 @@
 ---
-version: "3.7"
 services:
   mealie-frontend:
     image: hkotel/mealie:frontend-nightly
@@ -18,6 +17,7 @@ services:
       - traefik.http.routers.mealie.entrypoints=websecure
       - traefik.http.routers.mealie.middlewares=public-chain@file
       - traefik.http.services.mealie.loadbalancer.server.port=3000
+      - dockdns.name=mealie.ntasler.de
 
   mealie-api:
     image: hkotel/mealie:api-nightly

@@ -1,4 +1,3 @@
-version: '3'
 
 services:
   linkding:
@@ -13,6 +12,7 @@ services:
       - traefik.http.routers.linkding.rule=Host(`linkding.ntasler.de`)
       - traefik.http.routers.linkding.middlewares=private-chain@file
       - traefik.http.services.linkding.loadbalancer.server.port=9090
+      - dockdns.name=test123.nopshift.de
     networks:
       - traefik-proxy
 

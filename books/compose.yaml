@@ -1,4 +1,3 @@
-version: "3.7"
 services:
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf
@@ -18,6 +17,7 @@ services:
       - traefik.http.routers.audiobookshelf.entrypoints=websecure
       - traefik.http.routers.audiobookshelf.middlewares=public-chain@file
       - traefik.http.services.audiobookshelf.loadbalancer.server.port=80
+      - dockdns.name=audiobookshelf.ntasler.de
 
   readarr-ebooks:
     image: lscr.io/linuxserver/readarr:develop

@@ -1,10 +1,10 @@
-version: "3.8"
-
 services:
   immich-server:
     container_name: immich_server
-    image: ghcr.io/immich-app/immich-server:release
-    command: [ "start.sh", "immich" ]
+    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    command:
+      - start.sh
+      - immich
     volumes:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
     env_file:
@@ -14,7 +14,6 @@ services:
     depends_on:
       - redis
       - database
-      - typesense
     restart: unless-stopped
     networks:
       - traefik-proxy
@@ -28,8 +27,10 @@ services:
 
   immich-microservices:
     container_name: immich_microservices
-    image: ghcr.io/immich-app/immich-server:release
-    command: [ "start.sh", "microservices" ]
+    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    command:
+      - start.sh
+      - microservices
     volumes:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
     env_file:
@@ -39,28 +40,16 @@ services:
     depends_on:
       - redis
       - database
-      - typesense
     restart: unless-stopped
 
   immich-machine-learning:
     container_name: immich_machine_learning
-    image: ghcr.io/immich-app/immich-machine-learning:release
+    image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
     volumes:
       - ./model-cache:/cache
     env_file:
       - .env
     restart: unless-stopped
-
-  typesense:
-    container_name: immich_typesense
-    image: typesense/typesense:0.24.1
-    environment:
-      - TYPESENSE_API_KEY=${TYPESENSE_API_KEY}
-      - TYPESENSE_DATA_DIR=/data
-      # remove this to get debug messages
-      - GLOG_minloglevel=1
-    volumes:
-      - ./tsdata:/data
 
   redis:
     container_name: immich_redis
@@ -69,7 +58,7 @@ services:
 
   database:
     container_name: immich_postgres
-    image: postgres:14-alpine
+    image: tensorchord/pgvecto-rs:pg14-v0.2.0
     env_file:
       - .env
     environment:

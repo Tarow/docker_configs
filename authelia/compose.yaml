@@ -1,8 +1,7 @@
-version: '3.3'
 services:
   authelia:
     container_name: authelia
-    image: authelia/authelia
+    image: authelia/authelia:latest
     restart: unless-stopped
     volumes:
       - ./config:/config
@@ -16,6 +15,7 @@ services:
       - traefik.http.routers.authelia.entrypoints=websecure
       - traefik.http.routers.authelia.middlewares=public-chain@file
       - traefik.http.services.authelia.loadbalancer.server.port=9091
+      - dockdns.name=auth.ntasler.de
     networks:
       - traefik-proxy
 

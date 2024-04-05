@@ -1,7 +1,6 @@
-version: "3.3"
 services:
   traefik:
-    image: "traefik:latest"
+    image: "traefik:v3.0"
     container_name: "traefik"
     restart: unless-stopped
     labels:
@@ -14,7 +13,6 @@ services:
     ports:
       - "443:443" # HTTPS
       - "80:80" # HTTP
-      - "2222:2222" # Gitea SSH
     env_file:
       - traefik.env
     # Variables defined in traefik.env:

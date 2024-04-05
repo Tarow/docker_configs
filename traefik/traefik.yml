@@ -13,10 +13,8 @@ entryPoints:
         certResolver: letsencrypt
         domains:
           - main: ntasler.de
-            sans: 
+            sans:
               - "*.ntasler.de"
-  gitea:
-    address: ":2222"
 
 serversTransport:
   insecureSkipVerify: true
@@ -48,12 +46,10 @@ experimental:
   plugins:
     geoblock:
       moduleName: github.com/nscuro/traefik-plugin-geoblock
-      version: v0.11.0
+      version: v0.13.0
 
 accessLog:
   format: json
 
 log:
   level: WARN
-
-

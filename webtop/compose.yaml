@@ -1,5 +1,4 @@
 ---
-version: "2.1"
 services:
   webtop:
     image: lscr.io/linuxserver/webtop:ubuntu-mate
@@ -20,6 +19,7 @@ services:
     networks:
       - traefik-proxy   
     labels:
+      - dockdns.name=webtop.ntasler.de
       - traefik.enable=true
       - traefik.http.routers.webtop.rule=Host(`webtop.ntasler.de`) || Host(`kasm.ntasler.de`)
       - traefik.http.routers.webtop.entrypoints=websecure
