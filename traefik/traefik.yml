@@ -46,7 +46,7 @@ experimental:
   plugins:
     geoblock:
       moduleName: github.com/nscuro/traefik-plugin-geoblock
-      version: v0.13.0
+      version: v0.14.0
 
 accessLog:
   format: json

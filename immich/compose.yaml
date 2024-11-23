@@ -2,9 +2,6 @@ services:
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
-    command:
-      - start.sh
-      - immich
     volumes:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
     env_file:
@@ -23,24 +20,7 @@ services:
       - traefik.http.routers.immich.rule=Host(`immich.ntasler.de`)
       - traefik.http.routers.immich.entrypoints=websecure
       - traefik.http.routers.immich.middlewares=private-chain@file
-      - traefik.http.services.immich.loadbalancer.server.port=3001
-
-  immich-microservices:
-    container_name: immich_microservices
-    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
-    command:
-      - start.sh
-      - microservices
-    volumes:
-      - ${UPLOAD_LOCATION}:/usr/src/app/upload
-    env_file:
-      - .env
-    environment:
-      - NODE_ENV=production
-    depends_on:
-      - redis
-      - database
-    restart: unless-stopped
+      - traefik.http.services.immich.loadbalancer.server.port=2283
 
   immich-machine-learning:
     container_name: immich_machine_learning

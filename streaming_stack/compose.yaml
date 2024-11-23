@@ -13,6 +13,7 @@ services:
       - traefik-proxy
     volumes:
        - ./gluetun_config:/gluetun
+       - ./gluetun_config.toml:/gluetun/auth/config.toml
     env_file:
       - gluetun.env
     # Variables defined in gluetun.env:
@@ -25,6 +26,9 @@ services:
       - TZ=Europe/Berlin
       - UPDATER_PERIOD=12h
       - HTTPPROXY=on
+      - HEALTH_VPN_DURATION_INITIAL=60s
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1  
     labels:
       - "traefik.enable=true"
 
