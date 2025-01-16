@@ -193,6 +193,19 @@ services:
 #    networks:
 #      - traefik-proxy
 
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=Europe/Berlin
+    networks:
+      - traefik-proxy
+
+
 networks:
   traefik-proxy:
     external: true
